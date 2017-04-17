@@ -51,21 +51,21 @@ Because the methods are different on these collections and they also serve diffe
 If a List, the List is named with some prefix indicating what is being collected followed by the purpose of the list
 
 ```java
-List&lt;Account&gt; accountsToBeUpdatedList; // List to use in DML statement to update Accounts
+List<Account> accountsToBeUpdatedList; // List to use in DML statement to update Accounts
 ```
 
 If a Set, the Set is named with some prefix indicating what is being collected followed the purpose of the set
 
 ```java
-Set&lt;ID&gt; opportunityIdsProcessedSet; // Set of OpportunityIds used in a SOQL where clause
+Set<ID> opportunityIdsProcessedSet; // Set of OpportunityIds used in a SOQL where clause
 ```
 
 If a Map, the Map is always named as keyToWhatMap as in..
 
 ```java
-Map&lt;ID,Account&gt; accountIdToAccountMap; // Map of account Ids to Accounts
+Map<ID,Account> accountIdToAccountMap; // Map of account Ids to Accounts
 
-Map&lt;ID,List&lt;Account&gt;&gt; accountIdToAccountListMap; // Map of account Ids to List of Accounts
+Map<ID,List<Account>> accountIdToAccountListMap; // Map of account Ids to List of Accounts
 ```
 
 The advantage to the above is that when you have a method/class with lists, sets, and maps, it is easy to see what each variable does and what its inherent 'limitations/features' are as you debug or extend.
@@ -75,13 +75,13 @@ Avoid:
 Collection names that don't make it apparent that the variable is a collection rather than a single record.
 
 ```java
- List&lt;Account&gt; acct; // Might be confused with being a single Account without plural 
+ List<Account> acct; // Might be confused with being a single Account without plural 
  ```
 
 Not implying what the variables type is.
 
 ```java
- Map&lt;ID,Contact&gt; contacts; // variable name implies a list but is declared as a map!
+ Map<ID,Contact> contacts; // variable name implies a list but is declared as a map!
 ```
 
 **this**
@@ -103,9 +103,9 @@ public class Foo {
 Class names should be nouns, in mixed case with the first letter of each internal word capitalized ([Upper Camel Case](http://wiki.c2.com/?UpperCamelCase)). Try to keep your class names simple and descriptive. Use whole words—avoid acronyms and abbreviations (unless the abbreviation is much more widely used than the long form, such as URL or HTML). Examples:
 
 ```java
-public class *Raster* { }
+public class Raster { }
 
-public class *ImageSprite* { }
+public class ImageSprite { }
 ```
 
 ### Interfaces
@@ -113,12 +113,12 @@ public class *ImageSprite* { }
 Interface names should be capitalized like class names. Example:
 
 ```java
-public interface *PricingCalculatorTarget* { }
+public interface PricingCalculatorTarget { }
 ```
 
 ### Methods
 
-Methods should be verbs, in mixed case with the rst letter lowercase, with the rst letter of each internal word capitalized. AKA: Lower Camel
+Methods should be verbs, in mixed case with the rst letter lowercase, with the rst letter of each internal word capitalized. AKA: [Lower Camel](http://wiki.c2.com/?LowerCamelCase)
 
 Case
 
@@ -132,8 +132,7 @@ getBackground();
 
 ### Variables
 
-Except for constants, all instance, class, and class variables are in mixed case with a lowercase rst letter. Internal words start with
-capital letters.
+Except for constants, all instance, class, and class variables are in mixed case with a lowercase first letter. Internal words start with capital letters. AKA: [Lower Camel](http://wiki.c2.com/?LowerCamelCase)
 
 Variable names should be short yet meaningful. The choice of a variable name should be mnemonic— that is, designed to indicate to the casual observer the intent of its use. One-character variable names should be avoided except for temporary “throwaway” variables. Common names for temporary variables are i, j, k, m, and n for integers; c, d, and e for characters.
 
@@ -153,9 +152,9 @@ The names of constants should be all uppercase with words separated by
 under-scores (“\_”)
 
 ```java
-Integer MIN\_WIDTH = 4;
+Integer MIN_WIDTH = 4;
 
-Integer MAX\_WIDTH = 999;
+Integer MAX_WIDTH = 999;
 ```
 
 File Organization
