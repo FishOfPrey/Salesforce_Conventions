@@ -1,6 +1,6 @@
 # SFDC Coding Conventions
 
-A work in progress. Some conventions will need to be modifed per project. More often consistency is more important than the exact convention that is followed. 
+The following is a work in progress. Some conventions will need to be modifed per project. More often consistency within the project is more important than the exact convention that is followed. 
 
 > You can drive on the left or right hand side of the road. Just make sure everyone does it consistently.
 
@@ -14,16 +14,17 @@ Based largely on the following locations:
 ### Why Have Code Conventions
 
 Code conventions are important to programmers for a number of reasons:
-* 80% of the lifetime cost of a piece of software goes to maintenance
+* 80% of the lifetime cost of a piece of software goes to maintenance (or at least [the majority of the cost](https://softwareengineering.stackexchange.com/q/47991/4813))
 * Hardly any software is maintained for its whole life by the original author
 * Code conventions improve the readability of software, allowing engineers to understand new code more quickly and thoroughly
-* Source code is our product, and as much effort should be made in packaging it cleanly as one would with a consumer product at your grocery store
+* [Source code is our product](http://wiki.c2.com/?TheSourceCodeIsTheProduct), and as much effort should be made in packaging it cleanly as one would with a consumer product at your grocery store
 
 The Apex Dev guide has a section on [Naming Conventions](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_naming_conventions.htm) that just says to use java naming conventions (which prompted this [discussion](https://salesforce.stackexchange.com/q/890) on the Salesforce StackExchange).
 
-A good place to start might be the [Java Coding Conventions](http://www.oracle.com/technetwork/java/codeconventions-150003.pdf) since the languages are so similar, but I'm also looking for details about Salesforce specific uses such as formatting SOQL queries, as well as validation rules and formula fields. Is there a good set out there?
-
-Readability is of utmost importance. I don't care as much about adhering 100% to the indenting rules when code reviewing, as long as the query is 100% readable.
+A good place to start might be the [Java Coding Conventions](http://www.oracle.com/technetwork/java/codeconventions-150003.pdf) since the languages are so similar. For Salesforce the conventions also need to cover Salesforce specific uses such as:
+* formatting SOQL queries, 
+* validation rules
+* formula fields.
 
 The goal of this style guide is like that of any other style guide. Everyone has their own ideas of what makes code pretty. As long as there's some logic behind that beauty, no one is right or wrong. But it's important to have a standard so that:
 
@@ -35,12 +36,12 @@ The goal of this style guide is like that of any other style guide. Everyone has
 Field naming, object naming, every field must have descriptive help text and description, buttons vs custom links, etc...
 
 ### Boolean variables
-Try real hard to name these so when read aloud, indicate that when used in an if statement or in a VF-referenced boolean getter, the name reads as the 'true' value. (SFDC uses this approach for SObject field names such as Opportunity.isWon so consistency was my guide here)
+Aim to name these so they can naturally be read aloud in if statement conditions (or in a Visualforce-referenced boolean getter). Salesforce uses this approach for SObject field names such as ```Opportunity.isWon```
 
 ```java
-Boolean hasExceededCapacity; if (hasExceededCapacity) ...
-    
-public Boolean isDisabledFromEdit {get; private set;}
+Boolean hasExceededCapacity = false; 
+\\...
+if (hasExceededCapacity) \\...
 ```
 
 ### List, Sets, and Maps
@@ -50,51 +51,56 @@ Because the methods are different on these collections and they also serve diffe
 If a List, the List is named with some prefix indicating what is being collected followed by the purpose of the list
 
 ```java
-List&lt;Account&gt; aUpdList; // List to use in DML statement to update Accounts
+List&lt;Account&gt; accountsToBeUpdatedList; // List to use in DML statement to update Accounts
 ```
 
 If a Set, the Set is named with some prefix indicating what is being collected followed the purpose of the set
 
 ```java
-Set&lt;ID&gt; oIdSearchSet; // Set of OpportunityIds used in a SOQL where clause
+Set&lt;ID&gt; opportunityIdsProcessedSet; // Set of OpportunityIds used in a SOQL where clause
 ```
 
 If a Map, the Map is always named as keyToWhatMap as in..
 
 ```java
-Map&lt;ID,Account&gt; aIdToAccountMap; // Map of account Ids to Accounts
+Map&lt;ID,Account&gt; accountIdToAccountMap; // Map of account Ids to Accounts
 
-Map&lt;ID,List&lt;Account&gt;&gt; aIdToAccountListMap; // Map of account Ids to List of Accounts
+Map&lt;ID,List&lt;Account&gt;&gt; accountIdToAccountListMap; // Map of account Ids to List of Accounts
 ```
 
-The advantage to the above is that when you have a method/class with lists, sets, and maps, it is easy to see (particularly months later) what each variable does and what its inherent 'limitations/features' are as you debug or extend.
+The advantage to the above is that when you have a method/class with lists, sets, and maps, it is easy to see what each variable does and what its inherent 'limitations/features' are as you debug or extend.
 
-I eschew the approach so commonly seen in SFSE code posts:
+Avoid:
+
+Collection names that don't make it apparent that the variable is a collection rather than a single record.
 
 ```java
-> List&lt;Account&gt; acct; // not even a plural variable name!
-> Map&lt;ID,Contact&gt; contacts; // variable name implies a list but is
-> declared as a map!
+ List&lt;Account&gt; acct; // Might be confused with being a single Account without plural 
+ ```
+
+Not implying what the variables type is.
+
+```java
+ Map&lt;ID,Contact&gt; contacts; // variable name implies a list but is declared as a map!
 ```
 
 **this**
 
-Lastly, although not strictly required, whenever I reference a class member variable in a method, I try real hard to prefix by this.
+Using the `this.` prefix can help disambiguate is a variable is local to the method of a class instance variable.
 
 ```java
-public class Foo { Integer aUpdCounter;
+public class Foo { 
+    Integer aUpdCounter;
 
-public bar() { this.aUpdCounter++; // use of this. }
-
+    public bar() { 
+        this.aUpdCounter++; // use of this.
+    }
 }
 ```
 
-The reason I do this is when the class spans more than one screen's worth of my IDE, I like to be reminded when reviewing the code which
-variables are local to the method and which are class instance variables.
-
 ### Classes
 
-Class names should be nouns, in mixed case with the rst letter of each internal word capitalized. Try to keep your class names simple and descriptive. Use whole words—avoid acronyms and abbreviations (unless the abbreviation is much more widely used than the long form, such as URL or HTML). Examples:
+Class names should be nouns, in mixed case with the first letter of each internal word capitalized ([Upper Camel Case](http://wiki.c2.com/?UpperCamelCase)). Try to keep your class names simple and descriptive. Use whole words—avoid acronyms and abbreviations (unless the abbreviation is much more widely used than the long form, such as URL or HTML). Examples:
 
 ```java
 public class *Raster* { }
