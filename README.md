@@ -709,12 +709,10 @@ Blank spaces should be used in the following circumstances:
 * A keyword followed by a parenthesis should be separated by a space.
  Example:
 
-```
-> while (true) {
->
-> ...
->
-> }
+```java
+while (true) {
+    \\...
+}
 ```
 
 Note: A blank space should not be used between a method name and its opening parenthesis. This helps to distinguish keywords from method
@@ -722,9 +720,9 @@ calls.
 
 * A blank space should appear after commas in argument lists.
 
-* All binary operators except . should be separated from their operands by spaces. Blank spaces should never separate unary operators such as unary minus, increment (“++”), and decrement (“--”) from their operands. Example:
+* All binary operators except `.` should be separated from their operands by spaces. Blank spaces should never separate unary operators such as unary minus, increment (`++`), and decrement (`--`) from their operands. Example:
 
-```
+```java
  a += c + d;
  a = (a + b) / (c \* d);
  while (d++ = s++) {
@@ -734,14 +732,15 @@ calls.
 ```
 
 * The expressions in a for statement should be separated by blank spaces. Example:
-```
- for (expr1; expr2; expr3)
+```java
+ for (Integer i = 0; i < 100; i++) {
+ }
 ```
 
 * Casts should be followed by a blank. Examples: 
-```
-myMethod((Integer)
-> aNum, (Account) x); myFunc((Integer) (cp + 5), ((Integer) (i + 3)));
+```java
+myMethod((Integer)aNum, (Account)x);
+myFunc((Integer)(cp + 5), ((Integer)(i + 3)));
 
 ```
 **Security**
@@ -758,9 +757,9 @@ Test Code
 
 test code guidelines. Almost every Apex developer I've worked with who  isn't from a "real" dev background thinks the only reason tests exist  is to hit that 75% magic number. So the section mostly ends up being  training about what a good test does, and how to make a unit test  actually a unit test. (Which sucks and is why line coverage is such a  terrible goal to impose on the community. It could be argued that it's better than nothing, but that's about all you can say about it.)
 
-Aim to name Test classes with a \_Test suffix. This will make finding the corresponding test classes easier.
+Aim to name Test classes with a `\_Test` suffix. This will make finding the corresponding test classes easier.
 
 Batch Jobs
 ----------
 
-Before calling Database.executeBatch(), add a guard condition to check if either of ``System.isFuture() || System.isBatch()`` are true. If they are the batch job can't be started.
+Before calling `Database.executeBatch()`, add a guard condition to check if either of ``System.isFuture() || System.isBatch()`` are true. If they are the batch job can't be started.
