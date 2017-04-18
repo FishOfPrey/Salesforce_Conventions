@@ -18,6 +18,8 @@ Code conventions are important to programmers for a number of reasons:
 * Hardly any software is maintained for its whole life by the original author
 * Code conventions improve the readability of software, allowing engineers to understand new code more quickly and thoroughly
 * [Source code is our product](http://wiki.c2.com/?TheSourceCodeIsTheProduct), and as much effort should be made in packaging it cleanly as one would with a consumer product at your grocery store
+* Developers can focus more on the objective and less of the nuances of code formatting.
+* Less ongoing debate about often subjective stylics differences.
 
 The Apex Dev guide has a section on [Naming Conventions](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_naming_conventions.htm) that just says to use java naming conventions (which prompted this [discussion](https://salesforce.stackexchange.com/q/890) on the Salesforce StackExchange).
 
@@ -46,21 +48,29 @@ if (hasExceededCapacity) \\...
 
 ### List, Sets, and Maps
 
-Because the methods are different on these collections and they also serve different purposes (e.g. Lists can be indexed, used for DML, ...; Sets are good for uniqueness; Maps are directly indexable by key and crucial to bulkification), I like to suffix my collection variables with either List, Set, or Map.
+The three primary (and only) [collection classes](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections.htm) are common candidates for variables. While they are all collections their behaviour and methods differ.
 
-If a List, the List is named with some prefix indicating what is being collected followed by the purpose of the list
+Very roughly:
+
+* Lists can be indexed and iterated, used for DML
+* Sets are good for uniqueness and SOQL `IN` clauses
+* Maps are directly indexable by key and crucial to bulkification
+
+As such, it is useful to be able to distinguish the type from the collection variable name. This can be accomplised with a suffix of either List, Set, or Map.
+
+If a List, the List is named with some prefix indicating what is being collected followed by the purpose of the list:
 
 ```java
 List<Account> accountsToBeUpdatedList; // List to use in DML statement to update Accounts
 ```
 
-If a Set, the Set is named with some prefix indicating what is being collected followed the purpose of the set
+If a Set, the Set is named with some prefix indicating what is being collected followed the purpose of the set:
 
 ```java
 Set<ID> opportunityIdsProcessedSet; // Set of OpportunityIds used in a SOQL where clause
 ```
 
-If a Map, the Map is always named as keyToWhatMap as in..
+If a Map, the Map is always named as keyToWhatMap as in:
 
 ```java
 Map<ID,Account> accountIdToAccountMap; // Map of account Ids to Accounts
@@ -75,7 +85,7 @@ Avoid:
 Collection names that don't make it apparent that the variable is a collection rather than a single record.
 
 ```java
- List<Account> acct; // Might be confused with being a single Account without plural 
+ List<Account> acct; // Might be confused with being a single Account without using plural name
  ```
 
 Not implying what the variables type is.
@@ -118,7 +128,7 @@ public interface PricingCalculatorTarget { }
 
 ### Methods
 
-Methods should be verbs, in mixed case with the rst letter lowercase, with the rst letter of each internal word capitalized. AKA: [Lower Camel](http://wiki.c2.com/?LowerCamelCase)
+Methods should be verbs, in mixed case with the first letter lowercase, with the first letter of each internal word capitalized. AKA: [Lower Camel](http://wiki.c2.com/?LowerCamelCase)
 
 Case
 
@@ -134,16 +144,18 @@ getBackground();
 
 Except for constants, all instance, class, and class variables are in mixed case with a lowercase first letter. Internal words start with capital letters. AKA: [Lower Camel](http://wiki.c2.com/?LowerCamelCase)
 
-Variable names should be short yet meaningful. The choice of a variable name should be mnemonic— that is, designed to indicate to the casual observer the intent of its use. One-character variable names should be avoided except for temporary “throwaway” variables. Common names for temporary variables are i, j, k, m, and n for integers; c, d, and e for characters.
+Variable names should be short yet meaningful. The choice of a variable name should be mnemonic— that is, designed to indicate to the casual observer the intent of its use. 
+
+One-character variable names should be **avoided** *except* for temporary “throwaway” variables. Common names for temporary variables are i, j, k, m, and n for integers; c, d, and e for characters. These would be minimal in scope, such as for a `for` loop control variable. 
 
 Examples
 
 ```java
-Integer i;
+Integer totalOrderCount;
 
-Double myWidth;
+Double pageWidth;
 
-Account curAccount;
+Account currentAccount;
 ```
 
 ### Constants
@@ -195,6 +207,8 @@ Header Comments
 
 Header comments are block comments at the start of each apex class and should list a brief one line description of the class purpose. The header comments may optionally be expanded to include info on proper usage or caveats.
 
+Ideally the modifications made to the class will be tracked by source control rather than headers indicating developer names. I.e. No need to modify the header with the name and email address of everyone who has ever modified the file.
+
 Example:
 
 ```java
@@ -209,21 +223,7 @@ Example:
 * Aim for **one** Trigger per sObject type. This is important to maintain control of the order of execution.
 * The trigger should do the absolute minimal amount of work to delagate the work off to an Apex class (or classes). The important point here is the the trigger itself doesn't enforce the business logic.
 
-Design patterns 
-----------------
-
-* (a few teams I've worked with were committed to using a type of DAO or
- Service pattern, where no object-retrieval SOQL, and/or no direct
- references to SObject instances, are permitted in code outside of the
- DAO wrappers.)
-
-*  Current overview of code, including important utility classes. This
- section can be long if there's a big code base and is designed to be a
- guide to which classes a new developer needs to familiarize themselves
- with immediately. Prevents the problem of having dozens of places in
- code where dates are being converted/formatted differently, etc.
-
-SQOL
+SOQL
 ----
 
 For SOQL keep it as readable as possible so reader can see its function
@@ -232,24 +232,13 @@ named function, too, if that helps.
 
 1.  The first line has the assignment to the variable and the end line
     has the closing bracket.
-
-2.  Use Uppercase first letter for keywords (seems to work well with
-    syntax highlighter in IDE, isn't a pain to type, and the
-    [Force.com](http://Force.com/) I DE's schema browser generates it
-    that way).
-
-3.  Group like fields on the same line (e.g., from the same parent),
-    breaking for new groups of fields or if it gets too long to fit in a
-    reasonable IDE window (100 characters?).
-
-    1.  Primary fields of an object first.
-
-    2.  Parent fields second.
-
-    3.  Related lists last.
-
+2.  Use Uppercase first letter for keywords (seems to work well with syntax highlighter in IDE, isn't a pain to type, and the
+    Force.com IDE's schema browser generates it that way).
+3.  Group like fields on the same line (e.g., from the same parent), breaking for new groups of fields or if it gets too long to fit in a reasonable IDE window (100 characters?).
+  1.  Primary fields of an object first.
+  2.  Parent fields second.
+  3.  Related lists last.
 4.  Four spaces for indentation.
-
 5.  Indent for readability.
 
 ### Indentation
