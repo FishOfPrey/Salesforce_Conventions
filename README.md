@@ -241,32 +241,25 @@ named function, too, if that helps.
 4.  Four spaces for indentation.
 5.  Indent for readability.
 
-### Indentation
+## Indentation
 
-Four spaces should be used as the unit of indentation. Spaces for tabs
-are preferred over tabs for tabs as tabs are inconsistently expressed as
-four and eight spaces in various tools. Additionally web based editor
-tools, i.e. the developer console, frequently don’t support tabs and
-convert them on editing.
+Four spaces should be used as the unit of indentation. Spaces for tabs are preferred over tabs for tabs as tabs are inconsistently expressed as four and eight spaces in various tools. Additionally web based editor tools, i.e. the developer console, frequently don't support tabs and convert them on editing.
+
+**_Note that [indentation contributes to the apex character limit](https://salesforce.stackexchange.com/a/37267/102). Spaces versus tabs can become significant with larger code bases_**
 
 ### Line Length
 
-Avoid lines longer than 80 characters. While large monitors have made
-this limit less important, many tools either hide parts of lines longer
-than 80 characters, requiring alternate approaches or a lot of
-horizontal scrolling. For example, bitbucket requires you to scroll
-horizontally while reviewing code requests for longer lines.
+Avoid lines longer than 80 characters. While large monitors have made this limit less important, many tools either hide parts of lines longer than 80 characters, requiring alternate approaches or a lot of horizontal scrolling. For example, bitbucket requires you to scroll horizontally while reviewing code requests for longer lines.
 
 ### Wrapping Lines
 
-When an expression will not fit on a single line, break it according to
-these general principles:
+When an expression will not fit on a single line, break it according to these general principles:
 
 * Break after a comma
-* Break before an operator>
+* Break before an operator
 * Prefer higher-level breaks to lower-level breaks
 * Align the new line with the beginning of the expression at the same level on the previous line
-*  If the above rules lead to confusing code or to code that’s squished > up against the right margin, just indent 8 spaces instead.
+* If the above rules lead to confusing code or to code that’s squished up against the right margin, just indent 8 spaces instead.
 
 Examples of breaking method calls 
 ```
@@ -297,26 +290,20 @@ Following are two examples of indenting method declarations. The first is the co
 CONVENTIONAL:
 
 ```
- someMethod(Integer anArg, Account anotherArg, String yetAnotherArg,
- Case andStillAnotherArg) {
-
- ...
-
- }
+someMethod(Integer anArg, Account anotherArg, String yetAnotherArg,
+            Case andStillAnotherArg) {
+    \\...
+}
 ```
 
 ALTERNATE TO AVOID DEEP INDENTS:
 
 ```
- private static override absurdlyLongMethodNameFromHell(Integer anArg,
-
- Account anotherArg, String yetAnotherArg,
-
- Case andStillAnotherArg) {
-
- ...
-
- }
+private static override absurdlyLongMethodNameFromHell(Integer anArg,
+        Account anotherArg, String yetAnotherArg,
+        Case andStillAnotherArg) {
+    \\ ...
+}
 ```
 
 Line wrapping for if statements should generally use the 8-space rule, since conventional (4 space) indentation makes seeing the body
@@ -324,36 +311,41 @@ difficult.
 
 AVOID:
 
-```
+```java
  if ((condition1 && condition2)
-
  || (condition3 && condition4)
-
- ||!(condition5 && condition6)) { // BAD WRAPS doSomethingAboutIt(); //
- MAKE THIS LINE EASY TO MISS
-
+ ||!(condition5 && condition6)) { // BAD WRAPS
+ doSomethingAboutIt(); // MAKE THIS LINE EASY TO MISS
  }
 ```
 
 BETTER:
 
-```
+```java
  if ((condition1 && condition2)
-
- || (condition3 && condition4) ||!(condition5 && condition6)) {
- doSomethingAboutIt();
-
+         || (condition3 && condition4) 
+         ||!(condition5 && condition6)) {
+     doSomethingAboutIt();
  }
 ```
 
 ALSO GOOD:
 
-```
+```java
  if ((condition1 && condition2) || (condition3 && condition4)
-
- ||!(condition5 && condition6)) { doSomethingAboutIt();
-
+         ||!(condition5 && condition6)) {
+     doSomethingAboutIt();
  }
+```
+
+Here are three acceptable ways to format ternary expressions:
+```java
+alpha = (aLongBooleanExpression) ? beta : gamma;
+alpha = (aLongBooleanExpression) ? beta 
+                                 : gamma;
+alpha = (aLongBooleanExpression) 
+        ? beta 
+        : gamma;
 ```
 
 Comments
@@ -362,7 +354,8 @@ Comments
 When to Comment
 ---------------
 
-The best kind of comments are the ones you don’t need. You should first strive to make your code as simple as possible to understand without relying on comments as a crutch. Only at the point where the code cannot be made easier to understand should you begin to add comments. adapted from [*Coding Horror: Code Tells You How, Comments Tell You
+The best kind of comments are the ones you don’t need. You should first strive to make your code as simple as possible to understand without relying on comments as a crutch. Only at the point where the code cannot be made easier to understand should you begin to add comments. 
+_Adapted from_ [*Coding Horror: Code Tells You How, Comments Tell You
 Why*](http://www.codinghorror.com/blog/2006/12/code-tells-you-how-comments-tell-you-why.html)
 
 Block Comments (aka Multi-Line Comments)
@@ -407,11 +400,11 @@ Trailing Comments
 Very short comments can appear on the same line as the code they describe, but should be shifted far enough to separate them from the
 statements. If more than one short comment appears in a chunk of code, they should all be indented to the same tab setting.
 
-```
- if (a == 2) { return true; // special case
-
- } else { return isPrime(a); // works only for odd a
-
+```java
+ if (a == 2) { 
+     return true; // special case
+ } else { 
+     return isPrime(a); // works only for odd a
  }
 ```
 
@@ -424,15 +417,14 @@ Number Per Line
 One declaration per line is recommended since it encourages commenting.
 In other words,
 
-```
+```java
  Integer level; // indentation level
-
  Integer size; // size of table
 ```
 
 is preferred over
 
-```
+```java
  Integer var1, var2;
 ```
 
@@ -449,66 +441,49 @@ Do not put different types on the same line. Example:
  Integer foo; String\[\] fooarray; //WRONG!
 ```
 
-Note: The examples above use one space between the type and the identier. Another acceptable alternative is to use tabs, e.g.:
-
-```
- Integer level; // indentation level
-
- Integer size; // size of table
-
- Account currentEntry; // currently selected table entry
-```
-
 Placement
 ---------
 
-Put declarations only at the beginning of blocks. (A block is any code surrounded by curly braces “{” and “}”.) Don’t wait to declare variables until their rst use; it can confuse the unwary programmer and hamper code portability within the scope.
+Place declarations to [minimize variable scope](https://refactoring.com/catalog/reduceScopeOfVariable.html)
 
+~~Put declarations only at the beginning of blocks. (A block is any code surrounded by curly braces `{` and `}`.) Don't wait to declare variables until their first use; it can confuse the unwary programmer and hamper code portability within the scope.~~
+
+```java
+public void MyMethod() {
+    Integer int1; // beginning of method block 
+    if (condition) {
+        Integer int2; // beginning of "if" block
+        \\ ...
+    }
+}
 ```
- public void MyMethod() {
 
- Integer int1; // beginning of method block if (condition) {
+The one exception to the rule is indexes of for loops, which can be declared in the for statement:
 
- Integer int2; // beginning of "if" block
-
- ...
-
- } }
-```
-
-The one exception to the rule is indexes of for loops, which can be
-declared in the for statement:
-
-```
+```java
  for (Integer i = 0; i &lt; maxLoops; i++) { ...
 ```
 
-Avoid local declarations that hide declarations at higher levels. For
-example, do not declare the same variable name in an inner block:
+Avoid local declarations that hide declarations at higher levels. For example, do not declare the same variable name in an inner block:
+
+```java
 Integer count;
+\\...
 
-```
- ...
-
- func() { if (condition) {
-
- Integer count; // AVOID!
-
- ...
-
- }
-
- ...
-
- }
+func() {
+    if (condition) {
+        Integer count; // AVOID!
+        \\...
+    }
+    \\...
+}
 ```
 
 Initialization
 --------------
 
-Try to initialize local variables where they’re declared. The only
-reason not to initialize a variable where it’s declared is if the
-initial value depends on some computation occurring rst.
+Try to initialize local variables where they’re declared. The only reason not to initialize a variable where it’s declared is if the
+initial value depends on some computation occurring first.
 
 Class and Interface Declarations
 --------------------------------
@@ -709,7 +684,7 @@ Two blank lines should always be used in the following circumstances:
 One blank line should always be used in the following circumstances:
 
 * Between methods
-* Between the local variables in a method and its rst statement
+* Between the local variables in a method and its first statement
 * Before a block or single-line comment
 * Between logical sections inside a method to improve readability
 
