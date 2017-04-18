@@ -365,17 +365,16 @@ With the exception of [*header comments*](), block comments should be avoided du
 
 Traditional Java comments have an asterisk “\*” at the beginning of each line except the first and last. All lines except the first should be indented one space. Text snippets can help make writing in this style easier.
 
-```
-\*
+```java
+/*
  * Here is a block comment.
  */
 ```
 
-Optionally, you can skip the asterisks at the beginning of each line as
-shown below
+~~Optionally, you can skip the asterisks at the beginning of each line as shown below~~
 
-```
-\*
+```java
+/*
  Description: Another form of block comment
 */
 ```
@@ -385,11 +384,12 @@ Single-Line Comments
 
 Short comments can appear on a single line indented to the level of the code that follows. A single-line comment should be preceded by a blank line.
 
-```
- if (condition) {
- // Handle the condition.
- ...
- }
+```java
+if (condition) {
+
+    // Handle the condition.
+    //...
+}
 ```
 
 Trailing Comments
