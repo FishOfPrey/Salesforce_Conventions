@@ -717,7 +717,7 @@ calls.
  while (d++ = s++) {
      n++;
  }
- system.debug(‘size is ‘ + foo + ‘\\n’);
+ system.debug(‘size is ' + foo + '\\n');
 ```
 
 * The expressions in a for statement should be separated by blank spaces. Example:
