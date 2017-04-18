@@ -149,12 +149,12 @@ Account curAccount;
 ### Constants
 
 The names of constants should be all uppercase with words separated by
-under-scores (“\_”)
+under-scores (`_`)
 
 ```java
 Integer MIN_WIDTH = 4;
 
-Integer MAX_WIDTH = 999;
+Integer MAX_HEIGHT = 999;
 ```
 
 File Organization
@@ -178,23 +178,22 @@ Class Layout
  *    What is the purpose of this class? 
  */ 
 public class YourClass {  
-    /* Instance Variables */
-    /* Static Variables */
     /* Constants */
+    /* Static Variables */
+    /* Instance Variables */
     /* Static Initializers */
     /* Factory Methods */
     /* Constructors */
     /* Instance Methods */
     /* Static Methods */
     /* Inner Classes */
- 
 }
 ```
 
 Header Comments
 ---------------
 
-Header comments are block comments at the start of each apex class and should lists the name and email for any developers who’ve touched the class and a brief description one line description of the class purpose. The header comments may optionally be expanded to include info on proper usage or caveats.
+Header comments are block comments at the start of each apex class and should list a brief one line description of the class purpose. The header comments may optionally be expanded to include info on proper usage or caveats.
 
 Example:
 
@@ -202,12 +201,13 @@ Example:
 /*
  *   Description:
  *   Core methods for generating agreements from opportunities
-*/
+ */
 ```
 
 > **Trigger rules**
 
-See SFDC Trigger Conventions
+* Aim for **one** Trigger per sObject type. This is important to maintain control of the order of execution.
+* The trigger should do the absolute minimal amount of work to delagate the work off to an Apex class (or classes). The important point here is the the trigger itself doesn't enforce the business logic.
 
 Design patterns 
 ----------------
@@ -768,6 +768,8 @@ Test Code
 ---------
 
 test code guidelines. Almost every Apex developer I've worked with who  isn't from a "real" dev background thinks the only reason tests exist  is to hit that 75% magic number. So the section mostly ends up being  training about what a good test does, and how to make a unit test  actually a unit test. (Which sucks and is why line coverage is such a  terrible goal to impose on the community. It could be argued that it's better than nothing, but that's about all you can say about it.)
+
+Aim to name Test classes with a \_Test suffix. This will make finding the corresponding test classes easier.
 
 Batch Jobs
 ----------
