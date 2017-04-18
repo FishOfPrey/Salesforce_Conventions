@@ -757,7 +757,7 @@ Test Code
 
 test code guidelines. Almost every Apex developer I've worked with who  isn't from a "real" dev background thinks the only reason tests exist  is to hit that 75% magic number. So the section mostly ends up being  training about what a good test does, and how to make a unit test  actually a unit test. (Which sucks and is why line coverage is such a  terrible goal to impose on the community. It could be argued that it's better than nothing, but that's about all you can say about it.)
 
-Aim to name Test classes with a `\_Test` suffix. This will make finding the corresponding test classes easier.
+Aim to name Test classes with a `_Test` suffix. This will make finding the corresponding test classes easier.
 
 Batch Jobs
 ----------
