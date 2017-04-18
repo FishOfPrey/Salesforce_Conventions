@@ -591,7 +591,9 @@ A return statement with a value should not use parentheses unless they
 make the return value more obvious in some way. Example:
 
 ```
- return; return myDisk.size(); return (size ? size : defaultSize);
+ return;
+ return myDisk.size();
+ return (size ? size : defaultSize);
 ```
 
 if, if-else, if-else-if-else Statements
@@ -600,22 +602,32 @@ if, if-else, if-else-if-else Statements
 The if-else class of statements should have the following form:
 
 ```
- if (condition) { statements;
-
+ if (condition) { 
+     statements;
  }
 
- if (condition) { statements; } else { statements; }
+ if (condition) {
+     statements; 
+ } else { 
+     statements; 
+ }
 
- if (condition) { statements; } else if (condition) { statements; }
- else if (condition) { statements;
-
+ if (condition) { 
+     statements; 
+ } else if (condition) {
+     statements; 
+ } else if (condition) { 
+     statements;
+ } else { 
+     statements; 
  }
 ```
 
 Note: if statements always use braces {}. Avoid the following error-prone form:
 
 ```
-if (condition) //AVOID! THIS OMITS THE BRACES {}! statement;
+if (condition) //AVOID! THIS OMITS THE BRACES {}!
+    statement;
 ```
 
 for Statements
@@ -743,21 +755,12 @@ myMethod((Integer)aNum, (Account)x);
 myFunc((Integer)(cp + 5), ((Integer)(i + 3)));
 
 ```
-**Security**
-
-**team security practices**
-
-Third Party Libraries
----------------------
-
-use of third-party libraries in Apex and VF, which most commonly were not much more than apex-lang and JQuery / JQueryUI
 
 Test Code
 ---------
 
-test code guidelines. Almost every Apex developer I've worked with who  isn't from a "real" dev background thinks the only reason tests exist  is to hit that 75% magic number. So the section mostly ends up being  training about what a good test does, and how to make a unit test  actually a unit test. (Which sucks and is why line coverage is such a  terrible goal to impose on the community. It could be argued that it's better than nothing, but that's about all you can say about it.)
-
-Aim to name Test classes with a `_Test` suffix. This will make finding the corresponding test classes easier.
+* Aim to name Test classes with a `_Test` suffix. This will make finding the corresponding test classes easier.
+* Have meaningful assertions in every test case. Code coverage isn't the primary goal of the test cases, it's a by product of good testing.
 
 Batch Jobs
 ----------
