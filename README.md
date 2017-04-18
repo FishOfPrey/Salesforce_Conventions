@@ -273,23 +273,23 @@ Following are two examples of breaking an arithmetic expression. The first is pr
 
 AVOID:
 
-```
- longName1 = longName2 * (longName3 + longName4
-              - longName5) + 4 * longName6;
+```java
+longName1 = longName2 * (longName3 + longName4
+                         - longName5) + 4 * longName6;
 ```
 
 BETTER:
 
-```
- longName1 = longName2 \* (longName3 + longName4 - longName5)
-              + 4 \* longName6;
+```java
+longName1 = longName2 * (longName3 + longName4 - longName5)
+            + 4 * longName6;
 ```
 
 Following are two examples of indenting method declarations. The first is the conventional case. The second would shift the second and third lines to the far right if it used conventional indentation, so instead it indents only 8 spaces.
 
 CONVENTIONAL:
 
-```
+```java
 someMethod(Integer anArg, Account anotherArg, String yetAnotherArg,
             Case andStillAnotherArg) {
     \\...
@@ -298,7 +298,7 @@ someMethod(Integer anArg, Account anotherArg, String yetAnotherArg,
 
 ALTERNATE TO AVOID DEEP INDENTS:
 
-```
+```java
 private static override absurdlyLongMethodNameFromHell(Integer anArg,
         Account anotherArg, String yetAnotherArg,
         Case andStillAnotherArg) {
@@ -312,21 +312,21 @@ difficult.
 AVOID:
 
 ```java
- if ((condition1 && condition2)
- || (condition3 && condition4)
- ||!(condition5 && condition6)) { // BAD WRAPS
- doSomethingAboutIt(); // MAKE THIS LINE EASY TO MISS
- }
+if ((condition1 && condition2)
+    || (condition3 && condition4)
+    ||!(condition5 && condition6)) { // BAD WRAPS
+    doSomethingAboutIt(); // MAKE THIS LINE EASY TO MISS
+}
 ```
 
 BETTER:
 
 ```java
- if ((condition1 && condition2)
-         || (condition3 && condition4) 
-         ||!(condition5 && condition6)) {
-     doSomethingAboutIt();
- }
+if ((condition1 && condition2)
+        || (condition3 && condition4) 
+        ||!(condition5 && condition6)) {
+    doSomethingAboutIt();
+}
 ```
 
 ALSO GOOD:
@@ -383,9 +383,7 @@ shown below
 Single-Line Comments
 --------------------
 
-Short comments can appear on a single line indented to the level of the
-code that follows. A single-line comment should be preceded by a blank
-line.
+Short comments can appear on a single line indented to the level of the code that follows. A single-line comment should be preceded by a blank line.
 
 ```
  if (condition) {
