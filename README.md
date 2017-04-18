@@ -493,29 +493,22 @@ should be followed:
 
 * No space between a method name and the parenthesis “(“ starting its parameter list
 * Open brace “{” appears at the end of the same line as the declaration statement
-* Closing brace “}” starts a line by itself indented to match its  corresponding opening statement, except when it is a null statement
+* Closing brace “}” starts a line by itself indented to match its corresponding opening statement, except when it is a null statement
  the “}” should appear immediately after the “{“ 
  
- ```
- class Sample extends
- BaseClass {
+```java
+class Sample extends BaseClass {
+    Integer ivar1;
+    Integer ivar2;
 
- Integer ivar1;
+    Sample(Integer i, Integer j) {
+        ivar1 = i;
+        ivar2 = j;
+    }
 
- Integer ivar2;
-
- Sample(Integer i, Integer j) { ivar1 = i;
-
- ivar2 = j;
-
- }
-
- Integer emptyMethod() {}
-
- ...
-
- }
-
+    Integer emptyMethod() {}
+    \\...
+}
 ```
 
 * Methods are separated by a blank line
@@ -529,17 +522,15 @@ Simple Statements
 Each line should contain at most one statement. Example:
 
 ```
- argv++; argc--; // AVOID!
+argv++; argc--; // AVOID!
 ```
 
 Another example:
 
-```
- if (err) {
-
- system.debug(‘error’); return; //VERY WRONG!
-
- }
+```java
+if (err) {
+    system.debug('error'); return; //VERY WRONG!
+}
 ```
 
 Compound Statements
