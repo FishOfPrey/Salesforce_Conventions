@@ -444,9 +444,11 @@ Do not put different types on the same line. Example:
 Placement
 ---------
 
-Place declarations to [minimize variable scope](https://refactoring.com/catalog/reduceScopeOfVariable.html)
+Place declarations to [minimize variable scope](https://refactoring.com/catalog/reduceScopeOfVariable.html).
 
 ~~Put declarations only at the beginning of blocks. (A block is any code surrounded by curly braces `{` and `}`.) Don't wait to declare variables until their first use; it can confuse the unwary programmer and hamper code portability within the scope.~~
+
+Variables should be declared as close to their use as possible.
 
 ```java
 public void MyMethod() {
