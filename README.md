@@ -9,6 +9,7 @@ Based largely on the following locations:
 *	[What is a good set of coding conventions for Salesforce development?](https://salesforce.stackexchange.com/q/9605/102)
 *	[Apex Style Guide](https://github.com/PolarisProject/salesforceStyleGuide/blob/master/Apex%20style%20guide.md)
 *	[Naming Conventions](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_naming_conventions.htm)
+* [Salesforce Coding Conventions](https://docs.google.com/a/callawaycloudconsulting.com/document/d/1q8edvOeq-OBUqpeYShNvdrfwj_0nBHWpuIA172KFjKk/edit#)
 
 ## Introduction
 ### Why Have Code Conventions
@@ -21,16 +22,15 @@ Code conventions are important to programmers for a number of reasons:
 * Developers can focus more on the objective and less of the nuances of code formatting.
 * Less ongoing debate about often subjective stylics differences.
 
-The Apex Dev guide has a section on [Naming Conventions](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/apex_classes_naming_conventions.htm) that just says to use java naming conventions (which prompted this [discussion](https://salesforce.stackexchange.com/q/890) on the Salesforce StackExchange).
 
-A good place to start might be the [Java Coding Conventions](http://www.oracle.com/technetwork/java/codeconventions-150003.pdf) since the languages are so similar. For Salesforce the conventions also need to cover Salesforce specific uses such as:
+A good place to start is the [Java Coding Conventions](http://www.oracle.com/technetwork/java/codeconventions-150003.pdf) since the languages are so similar. For Salesforce the conventions also need to cover Salesforce specific uses such as:
 * formatting SOQL queries, 
 * validation rules
 * formula fields.
 
-The goal of this style guide is like that of any other style guide. Everyone has their own ideas of what makes code pretty. As long as there's some logic behind that beauty, no one is right or wrong. But it's important to have a standard so that:
+The goal of this style guide is to provide consistency between the contributions of individual developers. It's important to have a standard so that:
 
-1.	New and old developers, and outside contractors of all sorts can easily read, understand and maintain our growing code base.
+1.	New and old developers, and outside contractors of all sorts can easily read, understand and maintain the code base.
 2.	Code merges are easy to handle and are content-ful, not style-ful.
 
 ## SFDC custom object conventions
