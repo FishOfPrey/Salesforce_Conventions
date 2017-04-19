@@ -727,6 +727,8 @@ Test Code
 
 * Aim to name Test classes with a `_Test` suffix. This will make finding the corresponding test classes easier.
 * Have meaningful assertions in every test case. Code coverage isn't the primary goal of the test cases, it's a by product of good testing.
+* Prefer the usage of `@IsTest` annotation on test methods over `testMethod` modifier. The former can be used more consistently and is more explicit on access to all test data (`SeeAllData=true`).
+* Only use `@IsTest(SeeAllData=true)` if absolutly required. In all cases where possible testing data should be scripted in as part of the test case.
 
 Batch Jobs
 ----------
