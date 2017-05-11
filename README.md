@@ -4,6 +4,10 @@ The following is a work in progress. Some conventions will need to be modifed pe
 
 > You can drive on the left or right hand side of the road. Just make sure everyone does it consistently.
 
+The conventions should almost be contentious by design. The idea is to focus more on the purpose of the code than endlessly debating the merits of tabs vs. spaces.
+
+![Tabs vs Spaces](https://camo.githubusercontent.com/38467eb65de742741e216b6df7f986f2d7a621c6/687474703a2f2f7777772e656d61637377696b692e6f72672f706963732f7374617469632f54616273537061636573426f74682e706e67)
+
 Based largely on the following locations:
 
 *	[What is a good set of coding conventions for Salesforce development?](https://salesforce.stackexchange.com/q/9605/102)
