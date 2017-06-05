@@ -50,6 +50,25 @@ Boolean hasExceededCapacity = false;
 if (hasExceededCapacity) \\...
 ```
 
+Consider guarding Booleans in if conditions with explicit null checks. For instance, the following will generate a NullPointerException. 
+
+```
+Boolean isWon = null;
+if(isWon) { // Genereates NullPointerException
+  \\ ... 
+}
+
+if(isWon == true) { // Avoids Null issue, but...
+  \\ ... 
+} else {
+  System.debug('isWon is false'); // Dev might not realize foo could also be null.
+}
+
+if(isWon != null && isWon) { // Explicit Null checking to acknowledge null case
+  \\ ...
+}
+```
+
 ### List, Sets, and Maps
 
 The three primary (and only) [collection classes](https://developer.salesforce.com/docs/atlas.en-us.apexcode.meta/apexcode/langCon_apex_collections.htm) are common candidates for variables. While they are all collections their behaviour and methods differ.
@@ -706,7 +725,7 @@ calls.
 
 ```java
  a += c + d;
- a = (a + b) / (c \* d);
+ a = (a + b) / (c * d);
  while (d++ = s++) {
      n++;
  }
