@@ -241,7 +241,8 @@ Example:
  */
 ```
 
-> **Trigger rules**
+Trigger Classes
+---------------
 
 * Aim for **one** Trigger per sObject type. This is important to maintain control of the order of execution.
 * The trigger should do the absolute minimal amount of work to delagate the work off to an Apex class (or classes). The important point here is the the trigger itself doesn't enforce the business logic.
